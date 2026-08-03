@@ -1,0 +1,22 @@
+state = ['A', 'Dirty', 'Dirty']
+
+while True:
+    room = state[0]
+
+    if room == 'A':
+        if state[1] == 'Dirty':
+            print("Suck A")
+            state[1] = 'Clean'
+        else:
+            print("Move Right")
+            state[0] = 'B'
+
+    elif room == 'B':
+        if state[2] == 'Dirty':
+            print("Suck B")
+            state[2] = 'Clean'
+        else:
+            break
+
+print("Goal Achieved")
+print(state)
