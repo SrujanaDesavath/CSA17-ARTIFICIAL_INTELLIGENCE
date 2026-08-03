@@ -1,0 +1,40 @@
+from collections import deque
+
+def valid(m, c):
+    return (m == 0 or m >= c) and (3-m == 0 or 3-m >= 3-c)
+
+def bfs():
+    start = (3,3,'L')
+    goal = (0,0,'R')
+
+    q = deque([(start, [])])
+    visited = set()
+
+    while q:
+        state, path = q.popleft()
+
+        if state == goal:
+            print(path + [state])
+            return
+
+        if state in visited:
+            continue
+
+        visited.add(state)
+
+        m, c, boat = state
+
+        moves = [(1,0),(2,0),(0,1),(0,2),(1,1)]
+
+        for dm, dc in moves:
+            if boat == 'L':
+                nm, nc = m-dm, c-dc
+                nb = 'R'
+            else:
+                nm, nc = m+dm, c+dc
+                nb = 'L'
+
+            if 0 <= nm <= 3 and 0 <= nc <= 3 and valid(nm,nc):
+                q.append(((nm,nc,nb), path+[state]))
+
+bfs()
